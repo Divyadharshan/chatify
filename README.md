@@ -42,7 +42,7 @@ This will start the development server, and you can access the CHATify locally b
 
 Live Demo :
 -----------------------
-  [https://chatify-wklm.onrender.com/](https://chatify-wklm.onrender.com/)
+  [https://chatify-three.vercel.app/](https://chatify-three.vercel.app/)
 
 Usage :
 -----

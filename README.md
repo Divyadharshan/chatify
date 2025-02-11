@@ -42,7 +42,7 @@ This will start the development server, and you can access the CHATify locally b
 
 Live Demo :
 -----------------------
-  [https://chatify-three.vercel.app/](https://chatify-three.vercel.app/)
+  [https://chatify.azurewebsites.net/](https://chatify.azurewebsites.net/)
 
 Usage :
 -----

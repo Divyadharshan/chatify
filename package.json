@@ -77,9 +77,6 @@
     "vary": "^1.1.2",
     "ws": "^8.17.1"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "Krishnapriya K and Divya Dharshan S",
   "license": "ISC",

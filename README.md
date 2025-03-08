@@ -9,13 +9,6 @@ Features :
 * **Exit-Triggered Chat Deletion**: Enable automatic deletion of chats once users exit, ensuring that no data is stored after the session, maintaining user confidentiality and reducing storage overhead.
 * **Responsive Design**: Accessible on various devices, including desktops, tablets, and smartphones.
   
-Screenshots :
------------
-<div style="display:flex;">
-  <img src="public/login.png" width="500" height="300">
-  <img src="public/chat.png" width="500" height="300">
-</div>
-
 Getting Started :
 ---------------
 ### Prerequisites
@@ -50,11 +43,11 @@ Usage :
 -----
 ### Logging in and Chatting
 
-1.  Login with your respective username.
-2.  Chat with other users in real-time.
-3.  Messages are visible only while users are active.
-4.  Leave the chat when you're done.
-5.  Experience disappearing chats
+1. Create or join a chat room with your username.
+2. Chat with other users in real-time within the room.
+3. View Online Members in Room Details
+4. Messages disappear once users leave the chat.
+5. Exit when you're done
 
 Contributing :
 ------------

@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHATify</title>
@@ -7,7 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="shortcut icon" href="/file.png" type="image/x-icon">
     <meta property="og:title" content="CHATify">
-    <meta property="og:description" content="CHATify is a real-time chat application with instant messaging, multi-user support, and auto-deletion of chats on exit.">
+    <meta property="og:description"
+        content="CHATify is a real-time chat application with instant messaging, multi-user support, and auto-deletion of chats on exit.">
     <meta property="og:image" content="https://raw.githubusercontent.com/krish2213/chatify/main/public/chatify.png">
     <meta property="og:url" content="https://chatify.azurewebsites.net">
 </head>
@@ -20,24 +20,36 @@
                     <img src="/file.png" width="200" height="100">
                 </center>
                 <div class="forminput">
-                    <input type="text" id="username" placeholder="your username">
+                    <input type="text" id="username" placeholder="Your Username">
+                </div>
+                <div class="forminput">
+                    <input type="text" id="roomname" placeholder="Room Name">
                 </div>
                 <center>
                     <div class="forminput">
-                        <button id="joinuser">Join Chat</button>
+                        <button id="joinuser">Join or Create</button>
                     </div>
                 </center>
             </div>
-
         </div>
+
         <div class="screen chatscreen">
             <div class="head">
-                <div class="logo">CHATify
-                </div>
+                <div class="logo">CHATify</div>
+                <button id="roomdetails">Room Details</button>
                 <button id="exitchat">Leave</button>
             </div>
-            <div class="messages">
-                <!--
+            <div id="roomPopup" class="room-popup">
+                <div class="room-content">
+                    <span class="close">&times;</span>
+                    <p><b>Room Name:</b> <span id="roomNameDisplay"></span></p>
+                    <br>
+                    <p><b>People:</b></p>
+                    <ul id="roomMembers"></ul>
+                </div>
+            </div>
+            <div class="messages"></div>
+            <!--
                 <div class="message othermessage"> 
                     <div>
                      <div class="name">Krishnapriya</div>
@@ -52,7 +64,6 @@
                      <div class="time">11:11</div>
                     </div>
                 </div>-->
-            </div>
             <div class="typebox">
                 <input type="text" id="messageinput" placeholder="Message">
                 <button id="sendmessage">
@@ -61,6 +72,7 @@
             </div>
         </div>
     </div>
+
     <script src="socket.io/socket.io.js"></script>
     <script src="exe.js"></script>
 </body>

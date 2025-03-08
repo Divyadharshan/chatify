@@ -3,6 +3,8 @@
 
 Features :
 --------
+* **Room Creation & Management**: Users can create and join chat rooms by entering a unique room name. Each room maintains a separate chat space, ensuring private and organized conversations.
+* **See Who is in the Room**: Users can view the list of all active members in the room at any time. A scrollable member list allows users to check who is currently online.
 * **Multi-User Live Collaboration**: Allow multiple users to join and chat in real-time, fostering dynamic conversations. Messages appear instantly, creating a fluid, interactive experience for group discussions.
 * **Exit-Triggered Chat Deletion**: Enable automatic deletion of chats once users exit, ensuring that no data is stored after the session, maintaining user confidentiality and reducing storage overhead.
 * **Responsive Design**: Accessible on various devices, including desktops, tablets, and smartphones.

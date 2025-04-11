@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="shortcut icon" href="/file.png" type="image/x-icon">
     <meta property="og:title" content="CHATify">
-    <meta property="og:description"
-        content="CHATify is a real-time chat application with instant messaging, multi-user support, and auto-deletion of chats on exit.">
+    <meta property="og:description" content="CHATify is a real-time chat application with instant messaging, multi-user support, and auto-deletion of chats on exit.">
     <meta property="og:image" content="file.png">
     <meta property="og:url" content="https://chatify.azurewebsites.net">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
 </head>
 
 <body>
@@ -68,6 +68,8 @@
                     </div>
                 </div>-->
             <div class="typebox">
+                <button id="emoji-button" title="Add emoji">☺️</button>
+                <emoji-picker id="emoji-picker" style="position: absolute; bottom: 70px; right: 20px; display: none;"></emoji-picker>
                 <input type="text" id="messageinput" placeholder="Message">
                 <button id="sendmessage">
                     <i class="fas fa-paper-plane"></i>
@@ -78,6 +80,23 @@
 
     <script src="socket.io/socket.io.js"></script>
     <script src="exe.js"></script>
+    <script>
+        const emojiButton = document.getElementById("emoji-button");
+        const emojiPicker = document.getElementById("emoji-picker");
+        const messageInput = document.getElementById("messageinput");
+        emojiButton.addEventListener("click", () => {
+            emojiPicker.style.display = emojiPicker.style.display === "none" ? "block" : "none";
+        });
+        emojiPicker.addEventListener("emoji-click", event => {
+            messageInput.value += event.detail.unicode;
+            messageInput.focus();
+        });
+        document.addEventListener("click", (e) => {
+            if (!emojiPicker.contains(e.target) && e.target !== emojiButton) {
+                emojiPicker.style.display = "none";
+            }
+        });
+    </script>
 </body>
 
 </html>

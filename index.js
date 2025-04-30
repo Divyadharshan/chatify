@@ -39,6 +39,10 @@ io.on("connection", function (socket) {
             io.to(room).emit("roomDetails", { members });
         }
     });
+     
+    socket.on("image", ({ username, image, time, room }) => {
+        socket.to(room).emit("image", { username, image, time });
+    });
 
     socket.on("disconnect", function () {
         for (const room in rooms) {
@@ -53,5 +57,9 @@ io.on("connection", function (socket) {
         }
     });
 });
-
-server.listen(process.env.PORT || 3000);
+app.get(/(.*)/, (req, res) => {
+    res.redirect("/");
+})
+server.listen(process.env.PORT || 3000,()=>{
+    console.log("Listening")
+});

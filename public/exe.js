@@ -111,6 +111,33 @@ function main() {
         detectmessage("other", message);
     });
 
+    const imageInput = document.querySelector("#imageInput");
+    const imageUpload = document.querySelector("#imageUpload");
+
+    imageUpload.addEventListener("click", () => {
+        imageInput.click();
+    });
+
+    imageInput.addEventListener("change", () => {
+       const file = imageInput.files[0];
+       if (!file) return;
+
+       const reader = new FileReader();
+       reader.onload = () => {
+          const base64 = reader.result;
+          const time = currentTime();
+
+          detectmessage("myimage", { username: uname, image: base64, time });
+
+           socket.emit("image", { username: uname, image: base64, time, room });
+       };
+       reader.readAsDataURL(file);
+    });
+
+    socket.on("image", (message) => {
+       detectmessage("otherimage", message);
+    });
+    
     function detectmessage(type, message) {
         let message_container = app.querySelector(".chatscreen .messages");
         let element = document.createElement("div");
@@ -134,7 +161,23 @@ function main() {
         } else if (type == "update") {
             element.setAttribute("class", "update");
             element.innerHTML = `<div>${message}</div>`;
-        }
+        }else if (type == "myimage") {
+         element.setAttribute("class", "message mymessage");
+         element.innerHTML = `
+            <div>
+                <div class="name">You</div>
+                <img src="${message.image}" style="max-width: 200px; border-radius: 10px;" />
+                <div class="time">${message.time}</div>
+            </div>`;
+       } else if (type == "otherimage") {
+         element.setAttribute("class", "message othermessage");
+         element.innerHTML = `
+            <div>
+                <div class="name">${message.username}</div>
+                <img src="${message.image}" style="max-width: 200px; border-radius: 10px;" />
+                <div class="time">${message.time}</div>
+            </div>`;
+       }
 
         message_container.appendChild(element);
         message_container.scrollTop = message_container.scrollHeight - message_container.clientHeight;

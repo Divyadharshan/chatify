@@ -10,7 +10,8 @@
 - 👥 **Multi-User Live Collaboration** – Real-time group chat experience.
 - 💣 **Exit-Triggered Chat Deletion** – Chats are automatically deleted after all users exit the room.
 - 📱 **Responsive Design** – Fully accessible across devices (desktop, tablet, mobile).
-- 😎 **Emoji Support** – Users can send emojis for expressive conversations. 🎉😄🔥
+- 🖼️ **Image Sharing** – Send and receive images in chat to enhance conversations visually.
+- 😎 **Emoji Support** – Users can send emojis for expressive conversations.
 
 ---
 

@@ -119,25 +119,44 @@ function main() {
     });
 
     imageInput.addEventListener("change", () => {
-       const file = imageInput.files[0];
-       if (!file) return;
-
-       const reader = new FileReader();
-       reader.onload = () => {
-          const base64 = reader.result;
-          const time = currentTime();
-
-          detectmessage("myimage", { username: uname, image: base64, time });
-
-           socket.emit("image", { username: uname, image: base64, time, room });
-       };
-       reader.readAsDataURL(file);
+        const f = imageInput.files[0];
+        if (!f) return;
+        const fr = new FileReader();
+        fr.onload = () => {
+            const img = new Image();
+            img.onload = () => {
+                const MAX_W = 800;
+                const MAX_SIZE = 500 * 1024;
+                let w = img.width;
+                let h = img.height;
+                if (w > MAX_W) {
+                    h *= MAX_W / w;
+                    w = MAX_W;
+                }
+                const cvs = document.createElement("canvas");
+                cvs.width = w;
+                cvs.height = h;
+                const ctx = cvs.getContext("2d");
+                ctx.drawImage(img, 0, 0, w, h);
+                const b64 = cvs.toDataURL("image/jpeg", 0.6);
+                const size = Math.ceil((b64.length - 'data:image/jpeg;base64,'.length)*3/4);
+                if (size > MAX_SIZE) {
+                    alert("Image too large even after compression. Try a smaller image.");
+                    return;
+                }
+                const t = currentTime();
+                detectmessage("myimage", { username: uname, image: b64, time: t });
+                socket.emit("image", { username: uname, image: b64, time: t, room });
+            };
+            img.src = fr.result;
+        };
+        fr.readAsDataURL(f);
     });
 
     socket.on("image", (message) => {
-       detectmessage("otherimage", message);
+        detectmessage("otherimage", message);
     });
-    
+
     function detectmessage(type, message) {
         let message_container = app.querySelector(".chatscreen .messages");
         let element = document.createElement("div");
@@ -161,23 +180,23 @@ function main() {
         } else if (type == "update") {
             element.setAttribute("class", "update");
             element.innerHTML = `<div>${message}</div>`;
-        }else if (type == "myimage") {
-         element.setAttribute("class", "message mymessage");
-         element.innerHTML = `
+        } else if (type == "myimage") {
+            element.setAttribute("class", "message mymessage");
+            element.innerHTML = `
             <div>
                 <div class="name">You</div>
                 <img src="${message.image}" style="max-width: 200px; border-radius: 10px;" />
                 <div class="time">${message.time}</div>
             </div>`;
-       } else if (type == "otherimage") {
-         element.setAttribute("class", "message othermessage");
-         element.innerHTML = `
+        } else if (type == "otherimage") {
+            element.setAttribute("class", "message othermessage");
+            element.innerHTML = `
             <div>
                 <div class="name">${message.username}</div>
                 <img src="${message.image}" style="max-width: 200px; border-radius: 10px;" />
                 <div class="time">${message.time}</div>
             </div>`;
-       }
+        }
 
         message_container.appendChild(element);
         message_container.scrollTop = message_container.scrollHeight - message_container.clientHeight;
